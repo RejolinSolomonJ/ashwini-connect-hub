@@ -76,9 +76,11 @@ const ContactSection = () => {
                 <div>
                   <h4 className="font-medium mb-2">Our Address</h4>
                   <p className="text-gray-600">
-                    123 Education Street<br />
-                    Bangalore, Karnataka<br />
-                    India - 560001
+                    Kamalapuram Colony<br />
+                    Red Hills High Road<br />
+                    Ambattur, Chennai - 53<br />
+                    (Near Baba Temple)<br />
+                    India
                   </p>
                 </div>
               </div>
@@ -87,8 +89,8 @@ const ContactSection = () => {
                 <Phone className="text-education-teal mr-4 flex-shrink-0" size={24} />
                 <div>
                   <h4 className="font-medium mb-2">Phone Number</h4>
-                  <p className="text-gray-600">+91 12345 67890</p>
-                  <p className="text-gray-600">+91 98765 43210</p>
+                  <p className="text-gray-600">+91 70103 36298</p>
+                  <p className="text-gray-600">+91 81248 01551</p>
                 </div>
               </div>
               
@@ -96,8 +98,8 @@ const ContactSection = () => {
                 <Mail className="text-education-teal mr-4 flex-shrink-0" size={24} />
                 <div>
                   <h4 className="font-medium mb-2">Email</h4>
-                  <p className="text-gray-600">info@saiashwiniacademy.com</p>
-                  <p className="text-gray-600">admissions@saiashwiniacademy.com</p>
+                  <p className="text-gray-600">saiashwiniacademy@gmail.com</p>
+                  <p className="text-gray-600">kraman841@gmail.com</p>
                 </div>
               </div>
               
