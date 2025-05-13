@@ -81,7 +81,7 @@ const AboutPage = () => {
                 <div className="bg-gray-200 h-48 w-48 rounded-full mx-auto mb-6">
                   <p className="text-gray-500 italic pt-20">Photo</p>
                 </div>
-                <h3 className="text-xl font-bold text-education-blue mb-1">Dr. Ramesh Kumar</h3>
+                <h3 className="text-xl font-bold text-education-blue mb-1">Dr. Kothandaraman</h3>
                 <p className="text-gray-600 mb-4">Founder & Director</p>
                 <p className="text-gray-700">
                   Ph.D. in Mathematics with over 20 years of teaching experience across various boards.
@@ -91,7 +91,7 @@ const AboutPage = () => {
                 <div className="bg-gray-200 h-48 w-48 rounded-full mx-auto mb-6">
                   <p className="text-gray-500 italic pt-20">Photo</p>
                 </div>
-                <h3 className="text-xl font-bold text-education-blue mb-1">Mrs. Sujatha Reddy</h3>
+                <h3 className="text-xl font-bold text-education-blue mb-1">Rejolin Solomon J</h3>
                 <p className="text-gray-600 mb-4">Academic Head</p>
                 <p className="text-gray-700">
                   M.Sc. in Physics with specialized expertise in CBSE curriculum development.
