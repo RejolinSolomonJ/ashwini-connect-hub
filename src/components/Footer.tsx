@@ -21,7 +21,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="hover:text-white hover:underline"
               >
-                Developed by Lin's Infotechs
+                Developed by Lin's Infotechs Company Ltd
               </a>
             </p>
           </div>
@@ -65,11 +65,14 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
             <address className="text-gray-300 not-italic">
-              <p className="mb-2">123 Education Street</p>
-              <p className="mb-2">Bangalore, Karnataka</p>
-              <p className="mb-2">India - 560001</p>
+              <p className="mb-2">Kamalapuram Colony</p>
+              <p className="mb-2">Red Hills High Road</p>
+              <p className="mb-2">Ambattur, Chennai - 53</p>
+              <p className="mb-2">(Near Baba Temple)</p>
+              <p className="mb-2">India</p>
               <p className="mb-2">Phone: +91 12345 67890</p>
-              <p>Email: info@saiashwiniacademy.com</p>
+              <p>Email: saiashwiniacademy@gmail.com</p>
+              <p>Email: kraman841@gmail.com</p>
             </address>
           </div>
         </div>
