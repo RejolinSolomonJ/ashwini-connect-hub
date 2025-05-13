@@ -1,36 +1,46 @@
 
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 
-const courses = [
-  {
-    title: "Class 9-10 CBSE",
-    description: "All subjects including Mathematics, Science, Social Science, English, and Hindi.",
-    image: "/placeholder.svg",
-    link: "/courses/cbse-9-10"
-  },
-  {
-    title: "Class 9-10 State Board",
-    description: "Complete coaching for all State Board subjects with expert faculty.",
-    image: "/placeholder.svg",
-    link: "/courses/state-9-10"
-  },
-  {
-    title: "Class 11-12 Science",
-    description: "Specialized coaching in Mathematics, Physics, and Chemistry for Science students.",
-    image: "/placeholder.svg",
-    link: "/courses/11-12-science"
-  },
-  {
-    title: "Engineering Mathematics",
-    description: "Comprehensive coaching in all Mathematics subjects for engineering students.",
-    image: "/placeholder.svg",
-    link: "/courses/engineering-math"
-  }
-];
+interface Course {
+  id: string;
+  title: string;
+  description: string;
+  image_url: string;
+  level: string;
+  board: string;
+}
 
 const CoursesSection = () => {
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('courses')
+          .select('*')
+          .limit(4);
+        
+        if (error) throw error;
+        
+        if (data) {
+          setCourses(data);
+        }
+      } catch (error) {
+        console.error('Error fetching courses:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchCourses();
+  }, []);
+
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
@@ -41,32 +51,38 @@ const CoursesSection = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {courses.map((course, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow">
-              <CardHeader className="p-0">
-                <div className="h-48 bg-gray-100 overflow-hidden">
-                  <img 
-                    src={course.image} 
-                    alt={course.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </CardHeader>
-              <CardContent className="pt-6">
-                <CardTitle className="mb-2 text-education-blue">{course.title}</CardTitle>
-                <CardDescription className="h-20">{course.description}</CardDescription>
-              </CardContent>
-              <CardFooter>
-                <Link to={course.link} className="w-full">
-                  <Button className="w-full bg-education-teal hover:bg-education-teal/90 text-white">
-                    Learn More
-                  </Button>
-                </Link>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
+        {loading ? (
+          <div className="text-center py-12">
+            <p>Loading courses...</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {courses.map((course) => (
+              <Card key={course.id} className="hover:shadow-lg transition-shadow">
+                <CardHeader className="p-0">
+                  <div className="h-48 bg-gray-100 overflow-hidden">
+                    <img 
+                      src={course.image_url || "/placeholder.svg"} 
+                      alt={course.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </CardHeader>
+                <CardContent className="pt-6">
+                  <CardTitle className="mb-2 text-education-blue">{course.title}</CardTitle>
+                  <CardDescription className="h-20">{course.description}</CardDescription>
+                </CardContent>
+                <CardFooter>
+                  <Link to="/courses" className="w-full">
+                    <Button className="w-full bg-education-teal hover:bg-education-teal/90 text-white">
+                      Learn More
+                    </Button>
+                  </Link>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        )}
         
         <div className="mt-12 text-center">
           <Link to="/courses">

@@ -14,6 +14,16 @@ const Footer = () => {
             <p className="text-gray-300">
               © {new Date().getFullYear()} Sai Ashwini Academy. All rights reserved.
             </p>
+            <p className="text-gray-300 mt-2">
+              <a 
+                href="https://linsinfotechscompanyltd.on.drv.tw/www.linsinfotechs.com/#home" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-white hover:underline"
+              >
+                Developed by Lin's Infotechs
+              </a>
+            </p>
           </div>
           
           <div>
@@ -40,8 +50,13 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/login" className="text-gray-300 hover:text-white transition-colors">
-                  Student/Staff Login
+                <Link to="/student-form" className="text-gray-300 hover:text-white transition-colors">
+                  Student Registration
+                </Link>
+              </li>
+              <li>
+                <Link to="/staff-form" className="text-gray-300 hover:text-white transition-colors">
+                  Staff Registration
                 </Link>
               </li>
             </ul>

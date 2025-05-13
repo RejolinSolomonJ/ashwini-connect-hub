@@ -13,9 +13,14 @@ const HeroSection = () => {
           Providing excellence in education for CBSE, State Board, and Engineering Mathematics.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 mt-4">
-          <Link to="/register">
+          <Link to="/student-form">
             <Button size="lg" className="bg-education-teal hover:bg-education-teal/90 text-white px-8 py-6 text-lg">
-              Register Now
+              I'm a Student
+            </Button>
+          </Link>
+          <Link to="/staff-form">
+            <Button size="lg" className="bg-education-blue hover:bg-education-blue/90 text-white px-8 py-6 text-lg">
+              I'm a Staff
             </Button>
           </Link>
           <Link to="/courses">

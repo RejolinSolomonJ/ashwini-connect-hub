@@ -9,7 +9,102 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      courses: {
+        Row: {
+          board: string
+          created_at: string | null
+          description: string
+          id: string
+          image_url: string | null
+          level: string
+          title: string
+        }
+        Insert: {
+          board: string
+          created_at?: string | null
+          description: string
+          id?: string
+          image_url?: string | null
+          level: string
+          title: string
+        }
+        Update: {
+          board?: string
+          created_at?: string | null
+          description?: string
+          id?: string
+          image_url?: string | null
+          level?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      staff: {
+        Row: {
+          address: string
+          created_at: string | null
+          experience: string | null
+          id: string
+          name: string
+          phone: string
+          qualification: string | null
+          subjects: string[]
+        }
+        Insert: {
+          address: string
+          created_at?: string | null
+          experience?: string | null
+          id?: string
+          name: string
+          phone: string
+          qualification?: string | null
+          subjects: string[]
+        }
+        Update: {
+          address?: string
+          created_at?: string | null
+          experience?: string | null
+          id?: string
+          name?: string
+          phone?: string
+          qualification?: string | null
+          subjects?: string[]
+        }
+        Relationships: []
+      }
+      students: {
+        Row: {
+          address: string
+          board: string
+          class: string
+          created_at: string | null
+          id: string
+          name: string
+          phone: string
+          subject: string
+        }
+        Insert: {
+          address: string
+          board: string
+          class: string
+          created_at?: string | null
+          id?: string
+          name: string
+          phone: string
+          subject: string
+        }
+        Update: {
+          address?: string
+          board?: string
+          class?: string
+          created_at?: string | null
+          id?: string
+          name?: string
+          phone?: string
+          subject?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

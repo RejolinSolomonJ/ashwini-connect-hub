@@ -29,14 +29,14 @@ const Navbar = () => {
             <Link to="/contact" className="text-gray-700 hover:text-education-teal px-3 py-2 rounded-md font-medium">
               Contact
             </Link>
-            <Link to="/login">
-              <Button variant="outline" className="ml-4">
-                Login
+            <Link to="/student-form">
+              <Button className="bg-education-teal hover:bg-education-teal/90 text-white">
+                I'm a Student
               </Button>
             </Link>
-            <Link to="/register">
-              <Button className="bg-education-teal hover:bg-education-teal/90 text-white">
-                Register
+            <Link to="/staff-form">
+              <Button className="bg-education-blue hover:bg-education-blue/90 text-white ml-2">
+                I'm a Staff
               </Button>
             </Link>
           </div>
@@ -82,11 +82,15 @@ const Navbar = () => {
                 Contact
               </Link>
               <div className="pt-2 flex flex-col space-y-2">
-                <Link to="/login" onClick={() => setIsMenuOpen(false)}>
-                  <Button variant="outline" className="w-full">Login</Button>
+                <Link to="/student-form" onClick={() => setIsMenuOpen(false)}>
+                  <Button className="w-full bg-education-teal hover:bg-education-teal/90 text-white">
+                    I'm a Student
+                  </Button>
                 </Link>
-                <Link to="/register" onClick={() => setIsMenuOpen(false)}>
-                  <Button className="w-full bg-education-teal hover:bg-education-teal/90 text-white">Register</Button>
+                <Link to="/staff-form" onClick={() => setIsMenuOpen(false)}>
+                  <Button className="w-full bg-education-blue hover:bg-education-blue/90 text-white">
+                    I'm a Staff
+                  </Button>
                 </Link>
               </div>
             </div>
