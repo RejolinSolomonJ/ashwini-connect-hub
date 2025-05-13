@@ -1,3 +1,4 @@
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -33,8 +34,41 @@ const AboutPage = () => {
                   and confidence they need to succeed in their academic pursuits and beyond.
                 </p>
               </div>
-              <div className="bg-gray-200 h-80 rounded-lg flex items-center justify-center">
-                <p className="text-gray-500 italic">Mission Image Placeholder</p>
+              <div className="rounded-lg overflow-hidden shadow-lg">
+                <img 
+                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" 
+                  alt="Student studying" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <div className="rounded-lg overflow-hidden shadow-lg order-2 md:order-1">
+                <img 
+                  src="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&q=80&w=800" 
+                  alt="Vision" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="order-1 md:order-2">
+                <h2 className="text-3xl font-bold text-education-blue mb-6">Our Vision</h2>
+                <p className="text-gray-700 mb-4">
+                  We envision Sai Ashwini Academy as a premier educational institution that is recognized for its 
+                  excellence in teaching and learning, particularly in mathematics and sciences.
+                </p>
+                <p className="text-gray-700 mb-4">
+                  We aim to create a learning environment that fosters critical thinking, problem-solving skills, 
+                  and a growth mindset that prepares students not just for exams but for life's challenges.
+                </p>
+                <p className="text-gray-700">
+                  Our vision is to be a catalyst in transforming students into confident, capable individuals who 
+                  can contribute meaningfully to society and excel in their chosen fields.
+                </p>
               </div>
             </div>
           </div>
@@ -107,7 +141,7 @@ const AboutPage = () => {
               {/* Member 3 */}
               <div className="text-center">
                 <img
-                  src="/images/team/venkat-rao.jpg"
+                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=800"
                   alt="Prof. Venkat Rao"
                   className="h-48 w-48 rounded-full mx-auto mb-6 object-cover"
                 />

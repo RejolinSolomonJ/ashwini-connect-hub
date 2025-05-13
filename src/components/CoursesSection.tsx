@@ -29,7 +29,12 @@ const CoursesSection = () => {
         if (error) throw error;
         
         if (data) {
-          setCourses(data);
+          // Map the courses to include better default images if none provided
+          const coursesWithImages = data.map(course => ({
+            ...course,
+            image_url: course.image_url === '/placeholder.svg' ? getCourseDefaultImage(course.level, course.board) : course.image_url
+          }));
+          setCourses(coursesWithImages);
         }
       } catch (error) {
         console.error('Error fetching courses:', error);
@@ -40,6 +45,19 @@ const CoursesSection = () => {
     
     fetchCourses();
   }, []);
+
+  // Helper function to get a default image based on course level and board
+  const getCourseDefaultImage = (level: string, board: string) => {
+    if (level === '11-12' || level.includes('11')) {
+      return "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=800";
+    } else if (level === 'Engineering' || level.includes('Engineering')) {
+      return "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=800";
+    } else if (board === 'CBSE') {
+      return "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800";
+    } else {
+      return "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&q=80&w=800";
+    }
+  };
 
   return (
     <section className="py-16 bg-white">
@@ -62,7 +80,7 @@ const CoursesSection = () => {
                 <CardHeader className="p-0">
                   <div className="h-48 bg-gray-100 overflow-hidden">
                     <img 
-                      src={course.image_url || "/placeholder.svg"} 
+                      src={course.image_url} 
                       alt={course.title}
                       className="w-full h-full object-cover"
                     />
