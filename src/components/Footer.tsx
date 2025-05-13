@@ -70,9 +70,8 @@ const Footer = () => {
               <p className="mb-2">Ambattur, Chennai - 53</p>
               <p className="mb-2">(Near Baba Temple)</p>
               <p className="mb-2">India</p>
-              <p className="mb-2">Phone: +91 12345 67890</p>
+              <p className="mb-2">Phone: +91 70103 36298</p>
               <p>Email: saiashwiniacademy@gmail.com</p>
-              <p>       kraman841@gmail.com</p>
             </address>
           </div>
         </div>
