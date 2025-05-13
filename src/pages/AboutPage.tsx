@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -77,30 +76,41 @@ const AboutPage = () => {
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center text-education-blue mb-12">Our Team</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Member 1 */}
               <div className="text-center">
-                <div className="bg-gray-200 h-48 w-48 rounded-full mx-auto mb-6">
-                  <p className="text-gray-500 italic pt-20">Photo</p>
-                </div>
+                <img
+                  src="kothandaraman.jpg"
+                  alt="Dr. Kothandaraman"
+                  className="h-48 w-48 rounded-full mx-auto mb-6 object-cover"
+                />
                 <h3 className="text-xl font-bold text-education-blue mb-1">Dr. Kothandaraman</h3>
                 <p className="text-gray-600 mb-4">Founder & Director</p>
                 <p className="text-gray-700">
                   Ph.D. in Mathematics with over 20 years of teaching experience across various boards.
                 </p>
               </div>
+
+              {/* Member 2 */}
               <div className="text-center">
-                <div className="bg-gray-200 h-48 w-48 rounded-full mx-auto mb-6">
-                  <p className="text-gray-500 italic pt-20">Photo</p>
-                </div>
+                <img
+                  src="pexels-andrea-piacquadio-845434.png"
+                  alt="Rejolin Solomon J"
+                  className="h-48 w-48 rounded-full mx-auto mb-6 object-cover"
+                />
                 <h3 className="text-xl font-bold text-education-blue mb-1">Rejolin Solomon J</h3>
                 <p className="text-gray-600 mb-4">Academic Head</p>
                 <p className="text-gray-700">
                   M.Sc. in Physics with specialized expertise in CBSE curriculum development.
                 </p>
               </div>
+
+              {/* Member 3 */}
               <div className="text-center">
-                <div className="bg-gray-200 h-48 w-48 rounded-full mx-auto mb-6">
-                  <p className="text-gray-500 italic pt-20">Photo</p>
-                </div>
+                <img
+                  src="/images/team/venkat-rao.jpg"
+                  alt="Prof. Venkat Rao"
+                  className="h-48 w-48 rounded-full mx-auto mb-6 object-cover"
+                />
                 <h3 className="text-xl font-bold text-education-blue mb-1">Prof. Venkat Rao</h3>
                 <p className="text-gray-600 mb-4">Engineering Mathematics Expert</p>
                 <p className="text-gray-700">
