@@ -36,6 +36,7 @@ const StaffForm = () => {
   const [phone, setPhone] = useState('');
   const [qualification, setQualification] = useState('');
   const [experience, setExperience] = useState('');
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -45,6 +46,43 @@ const StaffForm = () => {
     } else {
       setSelectedSubjects(selectedSubjects.filter(id => id !== subjectId));
     }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Check file type (PDF only)
+      if (file.type !== 'application/pdf') {
+        toast.error('Please upload a PDF file only.');
+        return;
+      }
+      // Check file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error('File size must be less than 5MB.');
+        return;
+      }
+      setResumeFile(file);
+    }
+  };
+
+  const uploadResume = async (file: File) => {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
+    const filePath = `resumes/${fileName}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from('resumes')
+      .upload(filePath, file);
+
+    if (uploadError) {
+      throw uploadError;
+    }
+
+    const { data } = supabase.storage
+      .from('resumes')
+      .getPublicUrl(filePath);
+
+    return data.publicUrl;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -58,6 +96,13 @@ const StaffForm = () => {
     setIsLoading(true);
     
     try {
+      let resumeUrl = null;
+
+      // Upload resume if file is selected
+      if (resumeFile) {
+        resumeUrl = await uploadResume(resumeFile);
+      }
+
       const { error } = await supabase
         .from('staff')
         .insert({
@@ -66,7 +111,8 @@ const StaffForm = () => {
           subjects: selectedSubjects,
           qualification,
           experience,
-          phone
+          phone,
+          resume_url: resumeUrl
         });
       
       if (error) throw error;
@@ -171,6 +217,22 @@ const StaffForm = () => {
               onChange={(e) => setPhone(e.target.value)}
               required
             />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="resume-upload">Resume (PDF only, max 5MB)</Label>
+            <Input
+              id="resume-upload"
+              type="file"
+              accept=".pdf"
+              onChange={handleFileChange}
+              className="cursor-pointer"
+            />
+            {resumeFile && (
+              <p className="text-sm text-green-600">
+                Selected: {resumeFile.name}
+              </p>
+            )}
           </div>
         </CardContent>
         

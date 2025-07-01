@@ -48,6 +48,7 @@ export type Database = {
           name: string
           phone: string
           qualification: string | null
+          resume_url: string | null
           subjects: string[]
         }
         Insert: {
@@ -58,6 +59,7 @@ export type Database = {
           name: string
           phone: string
           qualification?: string | null
+          resume_url?: string | null
           subjects: string[]
         }
         Update: {
@@ -68,6 +70,7 @@ export type Database = {
           name?: string
           phone?: string
           qualification?: string | null
+          resume_url?: string | null
           subjects?: string[]
         }
         Relationships: []
@@ -79,8 +82,10 @@ export type Database = {
           class: string
           created_at: string | null
           id: string
+          mode: string
           name: string
           phone: string
+          school_name: string
           subject: string
         }
         Insert: {
@@ -89,8 +94,10 @@ export type Database = {
           class: string
           created_at?: string | null
           id?: string
+          mode?: string
           name: string
           phone: string
+          school_name?: string
           subject: string
         }
         Update: {
@@ -99,8 +106,10 @@ export type Database = {
           class?: string
           created_at?: string | null
           id?: string
+          mode?: string
           name?: string
           phone?: string
+          school_name?: string
           subject?: string
         }
         Relationships: []

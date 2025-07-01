@@ -30,6 +30,8 @@ const StudentForm = () => {
   const [boardType, setBoardType] = useState('');
   const [subject, setSubject] = useState('');
   const [phone, setPhone] = useState('');
+  const [mode, setMode] = useState('');
+  const [schoolName, setSchoolName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -46,7 +48,9 @@ const StudentForm = () => {
           class: classLevel,
           board: boardType,
           subject,
-          phone
+          phone,
+          mode,
+          school_name: schoolName
         });
       
       if (error) throw error;
@@ -93,6 +97,17 @@ const StudentForm = () => {
               required
             />
           </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="school-name">School Name</Label>
+            <Input
+              id="school-name"
+              placeholder="Your school name"
+              value={schoolName}
+              onChange={(e) => setSchoolName(e.target.value)}
+              required
+            />
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
@@ -124,6 +139,19 @@ const StudentForm = () => {
                 </SelectContent>
               </Select>
             </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="learning-mode">Learning Mode</Label>
+            <Select value={mode} onValueChange={setMode} required>
+              <SelectTrigger id="learning-mode">
+                <SelectValue placeholder="Select Mode" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="online">Online</SelectItem>
+                <SelectItem value="offline">Offline</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           
           <div className="space-y-2">
