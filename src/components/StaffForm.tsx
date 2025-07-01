@@ -49,7 +49,7 @@ const StaffForm = () => {
   };
 
   const validateGoogleDriveUrl = (url: string) => {
-    if (!url) return true; // Optional field
+    if (!url) return false; // Now required field
     
     // Check if it's a valid Google Drive URL
     const googleDriveRegex = /^https:\/\/drive\.google\.com\/file\/d\/[a-zA-Z0-9_-]+\/view(\?usp=sharing)?$/;
@@ -59,12 +59,18 @@ const StaffForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Validate all required fields
+    if (!name || !address || !phone || !qualification || !experience || !resumeUrl) {
+      toast.error('Please fill in all required fields.');
+      return;
+    }
+    
     if (selectedSubjects.length === 0) {
       toast.error('Please select at least one subject that you teach.');
       return;
     }
 
-    if (resumeUrl && !validateGoogleDriveUrl(resumeUrl)) {
+    if (!validateGoogleDriveUrl(resumeUrl)) {
       toast.error('Please enter a valid Google Drive sharing link (e.g., https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing)');
       return;
     }
@@ -81,7 +87,7 @@ const StaffForm = () => {
           qualification,
           experience,
           phone,
-          resume_url: resumeUrl || null
+          resume_url: resumeUrl
         });
       
       if (error) throw error;
@@ -108,7 +114,7 @@ const StaffForm = () => {
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="staff-name">Full Name</Label>
+            <Label htmlFor="staff-name">Full Name *</Label>
             <Input
               id="staff-name"
               placeholder="Jane Smith"
@@ -119,7 +125,7 @@ const StaffForm = () => {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="staff-address">Address</Label>
+            <Label htmlFor="staff-address">Address *</Label>
             <Textarea
               id="staff-address"
               placeholder="Your full address"
@@ -130,7 +136,7 @@ const StaffForm = () => {
           </div>
           
           <div className="space-y-2">
-            <Label>Subjects You Teach</Label>
+            <Label>Subjects You Teach *</Label>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 border rounded-md p-4">
               {subjects.map((subject) => (
                 <div key={subject.id} className="flex items-center space-x-2">
@@ -152,7 +158,7 @@ const StaffForm = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="staff-qualification">Qualification</Label>
+              <Label htmlFor="staff-qualification">Qualification *</Label>
               <Input
                 id="staff-qualification"
                 placeholder="e.g., M.Sc., B.Ed."
@@ -163,7 +169,7 @@ const StaffForm = () => {
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="staff-experience">Experience (Years)</Label>
+              <Label htmlFor="staff-experience">Experience (Years) *</Label>
               <Input
                 id="staff-experience"
                 type="number"
@@ -177,7 +183,7 @@ const StaffForm = () => {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="staff-phone">Phone Number</Label>
+            <Label htmlFor="staff-phone">Phone Number *</Label>
             <Input
               id="staff-phone"
               type="tel"
@@ -189,7 +195,7 @@ const StaffForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="resume-url">Resume (Google Drive Link)</Label>
+            <Label htmlFor="resume-url">Resume (Google Drive Link) *</Label>
             <Input
               id="resume-url"
               type="url"
@@ -197,9 +203,10 @@ const StaffForm = () => {
               value={resumeUrl}
               onChange={(e) => setResumeUrl(e.target.value)}
               className="text-sm"
+              required
             />
             <p className="text-xs text-gray-600">
-              Upload your resume to Google Drive, make it publicly viewable, and paste the sharing link here (optional)
+              Upload your resume to Google Drive, make it publicly viewable, and paste the sharing link here
             </p>
             {resumeUrl && !validateGoogleDriveUrl(resumeUrl) && (
               <p className="text-xs text-red-600">

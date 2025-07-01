@@ -37,6 +37,13 @@ const StudentForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate all required fields
+    if (!name || !address || !classLevel || !boardType || !subject || !phone || !mode || !schoolName) {
+      toast.error('Please fill in all required fields.');
+      return;
+    }
+    
     setIsLoading(true);
     
     try {
@@ -77,7 +84,7 @@ const StudentForm = () => {
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="student-name">Full Name</Label>
+            <Label htmlFor="student-name">Full Name *</Label>
             <Input
               id="student-name"
               placeholder="John Doe"
@@ -88,7 +95,7 @@ const StudentForm = () => {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="student-address">Address</Label>
+            <Label htmlFor="student-address">Address *</Label>
             <Textarea
               id="student-address"
               placeholder="Your full address"
@@ -99,7 +106,7 @@ const StudentForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="school-name">School Name</Label>
+            <Label htmlFor="school-name">School Name *</Label>
             <Input
               id="school-name"
               placeholder="Your school name"
@@ -111,7 +118,7 @@ const StudentForm = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="student-class">Class</Label>
+              <Label htmlFor="student-class">Class *</Label>
               <Select value={classLevel} onValueChange={setClassLevel} required>
                 <SelectTrigger id="student-class">
                   <SelectValue placeholder="Select Class" />
@@ -127,7 +134,7 @@ const StudentForm = () => {
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="student-board">Board</Label>
+              <Label htmlFor="student-board">Board *</Label>
               <Select value={boardType} onValueChange={setBoardType} required>
                 <SelectTrigger id="student-board">
                   <SelectValue placeholder="Select Board" />
@@ -142,7 +149,7 @@ const StudentForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="learning-mode">Learning Mode</Label>
+            <Label htmlFor="learning-mode">Learning Mode *</Label>
             <Select value={mode} onValueChange={setMode} required>
               <SelectTrigger id="learning-mode">
                 <SelectValue placeholder="Select Mode" />
@@ -155,7 +162,7 @@ const StudentForm = () => {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="student-subject">Subject Name</Label>
+            <Label htmlFor="student-subject">Subject Name *</Label>
             <Input
               id="student-subject"
               placeholder="e.g., Mathematics, Physics, All Subjects"
@@ -166,7 +173,7 @@ const StudentForm = () => {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="student-phone">Phone Number</Label>
+            <Label htmlFor="student-phone">Phone Number *</Label>
             <Input
               id="student-phone"
               type="tel"
