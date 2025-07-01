@@ -36,7 +36,7 @@ const StaffForm = () => {
   const [phone, setPhone] = useState('');
   const [qualification, setQualification] = useState('');
   const [experience, setExperience] = useState('');
-  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [resumeUrl, setResumeUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -48,41 +48,12 @@ const StaffForm = () => {
     }
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      // Check file type (PDF only)
-      if (file.type !== 'application/pdf') {
-        toast.error('Please upload a PDF file only.');
-        return;
-      }
-      // Check file size (max 5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        toast.error('File size must be less than 5MB.');
-        return;
-      }
-      setResumeFile(file);
-    }
-  };
-
-  const uploadResume = async (file: File) => {
-    const fileExt = file.name.split('.').pop();
-    const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
-    const filePath = `resumes/${fileName}`;
-
-    const { error: uploadError } = await supabase.storage
-      .from('resumes')
-      .upload(filePath, file);
-
-    if (uploadError) {
-      throw uploadError;
-    }
-
-    const { data } = supabase.storage
-      .from('resumes')
-      .getPublicUrl(filePath);
-
-    return data.publicUrl;
+  const validateGoogleDriveUrl = (url: string) => {
+    if (!url) return true; // Optional field
+    
+    // Check if it's a valid Google Drive URL
+    const googleDriveRegex = /^https:\/\/drive\.google\.com\/file\/d\/[a-zA-Z0-9_-]+\/view(\?usp=sharing)?$/;
+    return googleDriveRegex.test(url);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -92,17 +63,15 @@ const StaffForm = () => {
       toast.error('Please select at least one subject that you teach.');
       return;
     }
+
+    if (resumeUrl && !validateGoogleDriveUrl(resumeUrl)) {
+      toast.error('Please enter a valid Google Drive sharing link (e.g., https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing)');
+      return;
+    }
     
     setIsLoading(true);
     
     try {
-      let resumeUrl = null;
-
-      // Upload resume if file is selected
-      if (resumeFile) {
-        resumeUrl = await uploadResume(resumeFile);
-      }
-
       const { error } = await supabase
         .from('staff')
         .insert({
@@ -112,7 +81,7 @@ const StaffForm = () => {
           qualification,
           experience,
           phone,
-          resume_url: resumeUrl
+          resume_url: resumeUrl || null
         });
       
       if (error) throw error;
@@ -220,17 +189,21 @@ const StaffForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="resume-upload">Resume (PDF only, max 5MB)</Label>
+            <Label htmlFor="resume-url">Resume (Google Drive Link)</Label>
             <Input
-              id="resume-upload"
-              type="file"
-              accept=".pdf"
-              onChange={handleFileChange}
-              className="cursor-pointer"
+              id="resume-url"
+              type="url"
+              placeholder="https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing"
+              value={resumeUrl}
+              onChange={(e) => setResumeUrl(e.target.value)}
+              className="text-sm"
             />
-            {resumeFile && (
-              <p className="text-sm text-green-600">
-                Selected: {resumeFile.name}
+            <p className="text-xs text-gray-600">
+              Upload your resume to Google Drive, make it publicly viewable, and paste the sharing link here (optional)
+            </p>
+            {resumeUrl && !validateGoogleDriveUrl(resumeUrl) && (
+              <p className="text-xs text-red-600">
+                Please enter a valid Google Drive sharing link
               </p>
             )}
           </div>
